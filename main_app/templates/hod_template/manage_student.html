@@ -1,0 +1,61 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+
+{% block content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{page_title}}</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>S.no</th>
+                                    <th>Full Name</th>
+                                    <th>Email</th>
+                                    <th>Gender</th>
+                                    <th>Father Name</th>
+                                    <th>Father Occupation</th>
+                                    <th>Mother Name</th>
+                                    <th>Mother Occupation</th>
+                                    <th>10th Mark</th>
+                                    <th>12th Mark</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for student in students %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{student.first_name}} {{student.last_name}}</td>
+                                    <td>{{student.email}}</td>
+                                    <td>{{student.gender}}</td>
+                                    <td>{{student.father_name}}</td>
+                                    <td>{{student.father_occupation}}</td>
+                                    <td>{{student.mother_name}}</td>
+                                    <td>{{student.mother_occupation}}</td>
+                                    <td>{{student.mark_10}}</td>
+                                    <td>{{student.mark_12}}</td>
+                                    
+                                    <td><a href="{% url 'edit_student' student.id %}" class="btn btn-info">Approve</a> -
+                                        <a href="{% url 'delete_student' student.id %}" class="btn btn-danger" onclick="return confirm('Are you sure about this ?')">Reject</a>
+
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
